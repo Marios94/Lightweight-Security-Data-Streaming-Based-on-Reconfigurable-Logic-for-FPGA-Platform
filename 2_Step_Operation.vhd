@@ -1,0 +1,133 @@
+    --|--------LFSR Stepping Operation-----------|--
+    --|--------3*32-bit inputs, 1*32-bit output--|--
+    --|--------32-bit AND, 32-bit XOR------------|--
+
+library ieee;
+use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
+
+entity Step_Operation is
+    Port (
+    --|---------------------------------|--
+    --|-------- Inputs from LFSR -------|--
+    --|---------------------------------|--
+        R0_in           : in unsigned (31 downto 0);
+        R4_in           : in unsigned (31 downto 0);
+        R15_in          : in unsigned (31 downto 0);
+    --|---------------------------------|--
+    --|------ Outputs to LFSR ----------|--
+    --|---------------------------------|--       
+        R16_out         : out unsigned (31 downto 0);
+    --|---------------------------------|--
+    --|-------- Control signals --------|--
+    --|---------------------------------|--
+
+        clk         : in std_logic;
+        ce          : in std_logic
+        );
+end Step_Operation;
+
+architecture Behavioral of Step_Operation is
+
+    component Parallel_Register 
+        port (
+            clk     : in STD_LOGIC;
+            set     : in STD_LOGIC;
+            rst     : in STD_LOGIC;
+            ce      : in STD_LOGIC;
+            par_in  : in  unsigned (31 downto 0);
+            par_out : out unsigned (31 downto 0)
+            );
+        end component Parallel_Register;
+
+    component AND32
+        port(
+            a_in    : in  unsigned (7 downto 0);
+            c_out   : out unsigned (7 downto 0)
+            );
+    end component AND32;
+
+    component XOR_32
+        port(
+            a_in    : in  unsigned (31 downto 0);
+            b_in    : in  unsigned (31 downto 0);
+            c_out   : out unsigned (31 downto 0)
+            );
+    end component XOR_32;
+
+    component Multab_ROM
+        port(
+            address     : in  unsigned ( 7 downto 0);
+            clk         : in STD_LOGIC;
+            ce          : in std_logic;
+            data_out    : out unsigned (31 downto 0)
+            );
+    end component Multab_ROM;
+
+    signal R0           : unsigned (31 downto 0);
+    signal multab_in    : unsigned ( 7 downto 0);
+    signal multab_out   : unsigned (31 downto 0);
+    signal R0_24rs      : unsigned ( 7 downto 0);
+    signal R0_8ls       : unsigned (31 downto 0);
+    signal xor1         : unsigned (31 downto 0);
+    signal xor2         : unsigned (31 downto 0);
+    signal xor3         : unsigned (31 downto 0);
+begin
+
+    --|------shifting input from R[0]------|--
+    R0                  <= R0_in;
+    R0_8ls(31 downto 0) <= R0(23 downto  0) & X"00";    -- R0<<8
+    R0_24rs             <= R0(31 downto 24);            --R0>>24
+
+    --|------Calculate LUT address------|--
+
+    AND_32: component AND32
+        port map(
+            a_in    => R0_24rs,
+            c_out   => multab_in                        -- LUT address
+                );
+
+    --|------get value from LUT------|--
+
+    MULTAB : component Multab_ROM
+        port map(
+            address     => multab_in,
+            clk         => clk,
+            ce          => '1',
+            data_out    => multab_out
+                );
+
+    --|---------XORing-----------|-- 
+
+    XOR32_1: component XOR_32
+        port map(
+            a_in    => R4_in,
+            b_in    => R15_in,
+            c_out   => xor1
+                );
+
+    XOR32_2: component XOR_32
+        port map(
+            a_in    => R0_8ls,
+            b_in    => xor1,
+            c_out   => xor2
+                );
+
+    XOR32_3: component XOR_32
+        port map(
+            a_in    => multab_out,
+            b_in    => xor2,
+            c_out   => xor3
+                );
+
+    Step_op_REG : component Parallel_Register
+        port map(
+            clk     => clk,
+            set     => '0',
+            rst     => '0',
+            ce      => ce,
+            par_in  => xor3,
+            par_out => R16_out  --LFSR R[16] input
+                );
+        
+end Behavioral;
