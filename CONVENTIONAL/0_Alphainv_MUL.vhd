@@ -1,0 +1,69 @@
+    --|--------Alpha_inv LUT---------------|--
+    --|--------8-bit address, 32-bit data--|--
+    --|--------ROM of 256------------------|--
+    --|--------w/ chip enable, async-------|--
+    --|--------SNOW 2.0--------------------|--
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use ieee.numeric_std.all;
+
+
+entity Alphainv_MUL is
+Port ( 
+       address 	: in unsigned (7 downto 0);
+       clk 		: in STD_LOGIC;
+       ce 		: in std_logic;
+       data_out : out unsigned (31 downto 0));
+end Alphainv_MUL;
+
+architecture Behavioral of Alphainv_MUL is
+
+type ROM_type is array (0 to 255) of unsigned (31 downto 0);
+
+constant ROM : ROM_type := 
+(
+x"00000000", x"180F40CD", x"301E8033", x"2811C0FE", x"603CA966", x"7833E9AB", x"50222955", x"482D6998", --0
+x"C078FBCC", x"D877BB01", x"F0667BFF", x"E8693B32", x"A04452AA", x"B84B1267", x"905AD299", x"88559254", --1
+x"29F05F31", x"31FF1FFC", x"19EEDF02", x"01E19FCF", x"49CCF657", x"51C3B69A", x"79D27664", x"61DD36A9", --2
+x"E988A4FD", x"F187E430", x"D99624CE", x"C1996403", x"89B40D9B", x"91BB4D56", x"B9AA8DA8", x"A1A5CD65", --3
+x"5249BE62", x"4A46FEAF", x"62573E51", x"7A587E9C", x"32751704", x"2A7A57C9", x"026B9737", x"1A64D7FA", --4
+x"923145AE", x"8A3E0563", x"A22FC59D", x"BA208550", x"F20DECC8", x"EA02AC05", x"C2136CFB", x"DA1C2C36", --5
+x"7BB9E153", x"63B6A19E", x"4BA76160", x"53A821AD", x"1B854835", x"038A08F8", x"2B9BC806", x"339488CB", --6
+x"BBC11A9F", x"A3CE5A52", x"8BDF9AAC", x"93D0DA61", x"DBFDB3F9", x"C3F2F334", x"EBE333CA", x"F3EC7307", --7
+x"A492D5C4", x"BC9D9509", x"948C55F7", x"8C83153A", x"C4AE7CA2", x"DCA13C6F", x"F4B0FC91", x"ECBFBC5C", --8
+x"64EA2E08", x"7CE56EC5", x"54F4AE3B", x"4CFBEEF6", x"04D6876E", x"1CD9C7A3", x"34C8075D", x"2CC74790", --9
+x"8D628AF5", x"956DCA38", x"BD7C0AC6", x"A5734A0B", x"ED5E2393", x"F551635E", x"DD40A3A0", x"C54FE36D", --10
+x"4D1A7139", x"551531F4", x"7D04F10A", x"650BB1C7", x"2D26D85F", x"35299892", x"1D38586C", x"053718A1", --11
+x"F6DB6BA6", x"EED42B6B", x"C6C5EB95", x"DECAAB58", x"96E7C2C0", x"8EE8820D", x"A6F942F3", x"BEF6023E", --12
+x"36A3906A", x"2EACD0A7", x"06BD1059", x"1EB25094", x"569F390C", x"4E9079C1", x"6681B93F", x"7E8EF9F2", --13
+x"DF2B3497", x"C724745A", x"EF35B4A4", x"F73AF469", x"BF179DF1", x"A718DD3C", x"8F091DC2", x"97065D0F", --14
+x"1F53CF5B", x"075C8F96", x"2F4D4F68", x"37420FA5", x"7F6F663D", x"676026F0", x"4F71E60E", x"577EA6C3", --15
+x"E18D0321", x"F98243EC", x"D1938312", x"C99CC3DF", x"81B1AA47", x"99BEEA8A", x"B1AF2A74", x"A9A06AB9", --16
+x"21F5F8ED", x"39FAB820", x"11EB78DE", x"09E43813", x"41C9518B", x"59C61146", x"71D7D1B8", x"69D89175", --17
+x"C87D5C10", x"D0721CDD", x"F863DC23", x"E06C9CEE", x"A841F576", x"B04EB5BB", x"985F7545", x"80503588", --18
+x"0805A7DC", x"100AE711", x"381B27EF", x"20146722", x"68390EBA", x"70364E77", x"58278E89", x"4028CE44", --19
+x"B3C4BD43", x"ABCBFD8E", x"83DA3D70", x"9BD57DBD", x"D3F81425", x"CBF754E8", x"E3E69416", x"FBE9D4DB", --20
+x"73BC468F", x"6BB30642", x"43A2C6BC", x"5BAD8671", x"1380EFE9", x"0B8FAF24", x"239E6FDA", x"3B912F17", --21
+x"9A34E272", x"823BA2BF", x"AA2A6241", x"B225228C", x"FA084B14", x"E2070BD9", x"CA16CB27", x"D2198BEA", --22
+x"5A4C19BE", x"42435973", x"6A52998D", x"725DD940", x"3A70B0D8", x"227FF015", x"0A6E30EB", x"12617026", --23
+x"451FD6E5", x"5D109628", x"750156D6", x"6D0E161B", x"25237F83", x"3D2C3F4E", x"153DFFB0", x"0D32BF7D", --24
+x"85672D29", x"9D686DE4", x"B579AD1A", x"AD76EDD7", x"E55B844F", x"FD54C482", x"D545047C", x"CD4A44B1", --25
+x"6CEF89D4", x"74E0C919", x"5CF109E7", x"44FE492A", x"0CD320B2", x"14DC607F", x"3CCDA081", x"24C2E04C", --26
+x"AC977218", x"B49832D5", x"9C89F22B", x"8486B2E6", x"CCABDB7E", x"D4A49BB3", x"FCB55B4D", x"E4BA1B80", --27
+x"17566887", x"0F59284A", x"2748E8B4", x"3F47A879", x"776AC1E1", x"6F65812C", x"477441D2", x"5F7B011F", --28
+x"D72E934B", x"CF21D386", x"E7301378", x"FF3F53B5", x"B7123A2D", x"AF1D7AE0", x"870CBA1E", x"9F03FAD3", --29
+x"3EA637B6", x"26A9777B", x"0EB8B785", x"16B7F748", x"5E9A9ED0", x"4695DE1D", x"6E841EE3", x"768B5E2E", --30
+x"FEDECC7A", x"E6D18CB7", x"CEC04C49", x"D6CF0C84", x"9EE2651C", x"86ED25D1", x"AEFCE52F", x"B6F3A5E2"  --31
+);
+
+begin
+MULTAB : process(clk, address)
+    begin
+        if (clk='1') then
+            if (ce = '1') then
+                data_out <= ROM (to_integer(unsigned(address)));
+            end if;
+        end if;
+    end process;
+end Behavioral;
