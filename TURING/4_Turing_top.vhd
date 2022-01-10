@@ -61,95 +61,6 @@ entity Turing_top is
 
         blck_add_en             : in std_logic; --Block Add ctrl signals
 
-        --|-------test signals-------|--
-
-        --test_0_LFSR                 : out unsigned (31 downto 0);
-        --test_1_LFSR                 : out unsigned (31 downto 0);
-        --test_2_LFSR                 : out unsigned (31 downto 0);
-        --test_3_LFSR                 : out unsigned (31 downto 0);
-        --test_4_LFSR                 : out unsigned (31 downto 0);
-        --test_5_LFSR                 : out unsigned (31 downto 0);
-        --test_6_LFSR                 : out unsigned (31 downto 0);
-        --test_7_LFSR                 : out unsigned (31 downto 0);
-        --test_8_LFSR                 : out unsigned (31 downto 0);
-        --test_9_LFSR                 : out unsigned (31 downto 0);
-        --test_10_LFSR                : out unsigned (31 downto 0);
-        --test_11_LFSR                : out unsigned (31 downto 0);
-        --test_12_LFSR                : out unsigned (31 downto 0);
-        --test_13_LFSR                : out unsigned (31 downto 0);
-        --test_14_LFSR                : out unsigned (31 downto 0);
-        --test_15_LFSR                : out unsigned (31 downto 0);
-        --test_16_LFSR                : out unsigned (31 downto 0);
-
-        --test_0_LFSR_init            : out unsigned (31 downto 0);
-        --test_1_LFSR_init            : out unsigned (31 downto 0);
-        --test_2_LFSR_init            : out unsigned (31 downto 0);
-        --test_3_LFSR_init            : out unsigned (31 downto 0);
-        --test_4_LFSR_init            : out unsigned (31 downto 0);
-
-    --    test_mux_A_out              : out unsigned (31 downto 0);
-    --    test_mux_B_out              : out unsigned (31 downto 0);
-    --    test_mux_C_out              : out unsigned (31 downto 0);
-    --    test_mux_D_out              : out unsigned (31 downto 0);
-    --    test_mux_E_out              : out unsigned (31 downto 0);
-    --    test_mux1_out               : out unsigned (31 downto 0);
-    --    test_mux2_out               : out unsigned (31 downto 0);
-    --    test_mux3_out               : out unsigned (31 downto 0);
-    --    test_mux4_out               : out unsigned (31 downto 0);
-    --    test_mux5_out               : out unsigned (31 downto 0);
-    --    test_initvector_mux_0_out   : out unsigned (31 downto 0);
-    --    test_initvector_mux_1_out   : out unsigned (31 downto 0);
-    --    test_init_adder_mux_0_out   : out unsigned (31 downto 0);
-    --    test_init_adder_mux_1_out   : out unsigned (31 downto 0);
-    --    test_init_adder_out         : out unsigned (31 downto 0);
-    --    test_Init_REG_0_in          : out unsigned (31 downto 0);
-    --    test_Init_REG_1_in          : out unsigned (31 downto 0);
-    --    test_Init_REG_2_in          : out unsigned (31 downto 0);
-    --    test_Init_REG_3_out         : out unsigned (31 downto 0);
-    --    test_init_mux_0_out         : out unsigned (31 downto 0);
-    --    test_init_mux_1_out         : out unsigned (31 downto 0);
-    --    test_step_op_out            : out unsigned (31 downto 0);
-    --    test_key_reg_mux_out        : out unsigned (31 downto 0);
-    --    test_S_box_mixed_key        : out unsigned (31 downto 0);
-    --    test_key_reg_out            : out unsigned (31 downto 0);
-
-    --test_PHT_muxa   : out unsigned (31 downto 0);
-    --test_PHT_muxb   : out unsigned (31 downto 0);
-    --test_PHT_muxc1  : out unsigned (31 downto 0);
-    --test_PHT_muxc2  : out unsigned (31 downto 0);
-    --test_PHT_muxd1  : out unsigned (31 downto 0);
-    --test_PHT_muxd2  : out unsigned (31 downto 0);
-        --test_PHT_out_A              : out unsigned (31 downto 0);
-        --test_PHT_out_B              : out unsigned (31 downto 0);
-        --test_PHT_out_C              : out unsigned (31 downto 0);
-        --test_PHT_out_D              : out unsigned (31 downto 0);
-        --test_PHT_out_E              : out unsigned (31 downto 0);
-        --test_PHT_shift8             : out unsigned (31 downto 0);
-        --test_PHT_shift16            : out unsigned (31 downto 0);
-        --test_PHT_shift24            : out unsigned (31 downto 0);
-
-    --    test_S_Boxes_out_A          : out unsigned (31 downto 0);
-    --    test_S_Boxes_out_B          : out unsigned (31 downto 0);
-    --    test_S_Boxes_out_C          : out unsigned (31 downto 0);
-    --    test_S_Boxes_out_D          : out unsigned (31 downto 0);
-    --    test_S_Boxes_out_E          : out unsigned (31 downto 0);
-
-    --    test_Step_R0_shift8         : out unsigned (31 downto 0);
-    --    test_Step_R0_shift24        : out unsigned ( 7 downto 0);
-    --    test_Step_and_out           : out unsigned ( 7 downto 0);
-    --    test_Step_xor1              : out unsigned (31 downto 0);
-    --    test_Step_xor2              : out unsigned (31 downto 0);
-    --    test_Step_xor3              : out unsigned (31 downto 0);
-    --    test_Step_multab_out        : out unsigned (31 downto 0);
-
-    --    test_Sbox_word_in           : out unsigned (31 downto 0);
-    --    test_Sbox_k0                : out unsigned ( 7 downto 0);
-    --    test_Sbox_k1                : out unsigned ( 7 downto 0);
-    --    test_Sbox_k2                : out unsigned ( 7 downto 0);
-    --    test_Sbox_k3                : out unsigned ( 7 downto 0);
-    --    test_Sbox_wordout           : out unsigned (31 downto 0);
-    --    test_sbox_mixed_key         : out unsigned (31 downto 0);
-        --test_keystream              : out unsigned (159 downto 0);
         --|---Control Unti inputs---|--
         IV_OrKey_DefVal             : in unsigned ( 31 downto 0);
         text_message                : in unsigned ( 159 downto 0);
@@ -399,43 +310,11 @@ end component MUX_6x1;
         --|----------------------|--
 
         test_word_in    : out unsigned (31 downto 0);
---        test_b0         : out unsigned ( 7 downto 0);
---        test_b1         : out unsigned ( 7 downto 0);
---        test_b2         : out unsigned ( 7 downto 0);
---        test_b3         : out unsigned ( 7 downto 0);
         test_k0         : out unsigned ( 7 downto 0);
         test_k1         : out unsigned ( 7 downto 0);
         test_k2         : out unsigned ( 7 downto 0);
         test_k3         : out unsigned ( 7 downto 0);
---        test_sbox_o_0   : out unsigned ( 7 downto 0);
---        test_sbox_o_1   : out unsigned ( 7 downto 0);
---        test_sbox_o_2   : out unsigned ( 7 downto 0);
---        test_sbox_o_3   : out unsigned ( 7 downto 0);
---        test_xor8_o_0   : out unsigned ( 7 downto 0);
---        test_xor8_o_1   : out unsigned ( 7 downto 0);
---        test_xor8_o_2   : out unsigned ( 7 downto 0);
---        test_xor8_o_3   : out unsigned ( 7 downto 0);
---        test_mux_o_0    : out unsigned (31 downto 0);
---        test_mux_o_1    : out unsigned (31 downto 0);
---        test_mux_o_2    : out unsigned (31 downto 0);
---        test_mux_o_3    : out unsigned (31 downto 0);
---        test_qbox_o_0   : out unsigned (31 downto 0);
---        test_qbox_o_1   : out unsigned (31 downto 0);
---        test_qbox_o_2   : out unsigned (31 downto 0);
---        test_qbox_o_3   : out unsigned (31 downto 0);
---        test_shift_8    : out unsigned (31 downto 0);
---        test_shift_16   : out unsigned (31 downto 0);
---        test_shift_24   : out unsigned (31 downto 0);
---        test_w0         : out unsigned (31 downto 0);
---        test_w1         : out unsigned (31 downto 0);
---        test_w2         : out unsigned (31 downto 0);
---        test_w3         : out unsigned (31 downto 0);
---        test_xorA       : out unsigned (31 downto 0);
---        test_xorB       : out unsigned (31 downto 0);
         test_wordout    : out unsigned (31 downto 0);
---        test_xor_o_0    : out unsigned (31 downto 0);
---        test_xor_o_1    : out unsigned (31 downto 0);
---        test_xor_o_2    : out unsigned (31 downto 0);
 
         --|XA-XE output/Mixed Key|--
         --|----------------------|--
@@ -648,13 +527,6 @@ begin
         R4_in           => wire_4,
         R15_in          => wire_15,
         R16_out         => step_op_out,
-        --test_R0_shift8  => test_Step_R0_shift8,
-        --test_R0_shift24 => test_Step_R0_shift24,
-        --test_and_out    => test_Step_and_out,
-        --test_xor1       => test_Step_xor1,
-        --test_xor2       => test_Step_xor2,
-        --test_xor3       => test_Step_xor3,
-        --test_multab_out => test_Step_multab_out,
         clk             => clk,
         ce              => Step_op_ce
                 );
@@ -793,12 +665,6 @@ begin
                 clk         => clk,
                 reg_enable  => reg_enable_pht,
                 reg5_enable => reg5_enable_pht,
-                    --test_muxa   => test_PHT_muxa,
-                    --test_muxb   => test_PHT_muxb,
-                    --test_muxc1  => test_PHT_muxc1,
-                    --test_muxc2  => test_PHT_muxc2,
-                    --test_muxd1  => test_PHT_muxd1,
-                    --test_muxd2  => test_PHT_muxd2,
                 TA          => PHT_out_A,
                 TB          => PHT_out_B,
                 TC          => PHT_out_C,
@@ -877,44 +743,6 @@ begin
         regE_ce         => sbox_regE_ce,
         regE_set        => '0',
         regE_rst        => '0',
-        --test_word_in    => test_Sbox_word_in,
---        test_b0         => test_Sbox_b0,
---        test_b1         => test_Sbox_b1,
---        test_b2         => test_Sbox_b2,
---        test_b3         => test_Sbox_b3,
-        --test_k0         => test_Sbox_k0,
-        --test_k1         => test_Sbox_k1,
-        --test_k2         => test_Sbox_k2,
-        --test_k3         => test_Sbox_k3,
---        test_sbox_o_0   => test_Sbox_sbox_o_0,
---        test_sbox_o_1   => test_Sbox_sbox_o_1,
---        test_sbox_o_2   => test_Sbox_sbox_o_2,
---        test_sbox_o_3   => test_Sbox_sbox_o_3,
---        test_xor8_o_0   => test_Sbox_xor8_o_0,
---        test_xor8_o_1   => test_Sbox_xor8_o_1,
---        test_xor8_o_2   => test_Sbox_xor8_o_2,
---        test_xor8_o_3   => test_Sbox_xor8_o_3,
---        test_mux_o_0    => test_Sbox_mux_o_0,
---        test_mux_o_1    => test_Sbox_mux_o_1,
---        test_mux_o_2    => test_Sbox_mux_o_2,
---        test_mux_o_3    => test_Sbox_mux_o_3,
---        test_qbox_o_0   => test_Sbox_qbox_o_0,
---        test_qbox_o_1   => test_Sbox_qbox_o_1,
---        test_qbox_o_2   => test_Sbox_qbox_o_2,
---        test_qbox_o_3   => test_Sbox_qbox_o_3,
---        test_shift_8    => test_Sbox_shift_8,
---        test_shift_16   => test_Sbox_shift_16,
---        test_shift_24   => test_Sbox_shift_24,
---        test_w0         => test_Sbox_w0,
---        test_w1         => test_Sbox_w1,
---        test_w2         => test_Sbox_w2,
---        test_w3         => test_Sbox_w3,
---        test_xorA       => test_Sbox_xorA,
---        test_xorB       => test_Sbox_xorB,
-        --test_wordout    => test_Sbox_wordout,
---        test_xor_o_0    => test_Sbox_xor_o_0,
---        test_xor_o_1    => test_Sbox_xor_o_1,
---        test_xor_o_2    => test_Sbox_xor_o_2,
         XA              => S_Boxes_out_A,
         XB              => S_Boxes_out_B,
         XC              => S_Boxes_out_C,
@@ -1062,72 +890,5 @@ begin
             b_in    => text_message (159 downto 128),
             c_out   => ciphertext   (159 downto 128)
                 );
-
-
-    --test_0_LFSR     <= wire_0;
-    --test_1_LFSR     <= wire_1;
-    --test_2_LFSR     <= wire_2;
-    --test_3_LFSR     <= wire_3;
-    --test_4_LFSR     <= wire_4;
-    --test_5_LFSR     <= wire_5;
-    --test_6_LFSR     <= wire_6;
-    --test_7_LFSR     <= wire_7;
-    --test_8_LFSR     <= wire_8;
-    --test_9_LFSR     <= wire_9;
-    --test_10_LFSR    <= wire_10;
-    --test_11_LFSR    <= wire_11;
-    --test_12_LFSR    <= wire_12;
-    --test_13_LFSR    <= wire_13;
-    --test_14_LFSR    <= wire_14;
-    --test_15_LFSR    <= wire_15;
-    --test_16_LFSR    <= wire_16;
-
-    --test_4_LFSR_init    <= key_reg_S4;
-    --test_3_LFSR_init    <= key_reg_S3;
-    --test_2_LFSR_init    <= key_reg_S2;
-    --test_1_LFSR_init    <= key_reg_S1;
-    --test_0_LFSR_init    <= key_reg_S0;
-
-    --test_mux_A_out              <= mux_A_out;
-    --test_mux_B_out              <= mux_B_out;
-    --test_mux_C_out              <= mux_C_out;
-    --test_mux_D_out              <= mux_D_out;
-    --test_mux_E_out              <= mux_E_out;
-    --test_mux1_out               <= mux1_out;
-    --test_mux2_out               <= mux2_out;
-    --test_mux3_out               <= mux3_out;
-    --test_mux4_out               <= mux4_out;
-    --test_mux5_out               <= mux5_out;
-    --test_initvector_mux_0_out   <= initvector_mux_0_out;
-    --test_initvector_mux_1_out   <= initvector_mux_1_out;
-    --test_init_adder_mux_0_out   <= init_adder_mux_0_out;
-    --test_init_adder_mux_1_out   <= init_adder_mux_1_out;
-    --test_init_adder_out         <= init_adder_out;
-    --test_Init_REG_0_in          <= Init_REG_0_out;
-    --test_Init_REG_1_in          <= Init_REG_1_out;
-    --test_Init_REG_2_in          <= Init_REG_2_out;
-    --test_Init_REG_3_out         <= Init_REG_3_out;
-    --test_init_mux_0_out         <= init_mux_0_out;
-    --test_init_mux_1_out         <= init_mux_1_out;
-    --test_step_op_out            <= step_op_out;
-    --test_key_reg_mux_out        <= key_reg_mux_out;
-    --test_S_box_mixed_key        <= S_box_mixed_key;
-    --test_key_reg_out            <= key_reg_out;
-    --test_PHT_out_A              <=   PHT_out_A;
-    --test_PHT_out_B              <=   PHT_out_B;
-    --test_PHT_out_C              <=   PHT_out_C;
-    --test_PHT_out_D              <=   PHT_out_D;
-
-    --test_PHT_out_E              <= PHT_out_E;
-    --test_PHT_shift8             <= PHT_shift8;
-    --test_PHT_shift16            <= PHT_shift16;
-    --test_PHT_shift24            <= PHT_shift24;
-    --test_S_Boxes_out_A          <= S_Boxes_out_A;
-    --test_S_Boxes_out_B          <= S_Boxes_out_B;
-    --test_S_Boxes_out_C          <= S_Boxes_out_C;
-    --test_S_Boxes_out_D          <= S_Boxes_out_D;
-    --test_S_Boxes_out_E          <= S_Boxes_out_E;
-    --test_sbox_mixed_key         <= S_box_mixed_key;
---    test_keystream              <= Vt;
 
 end Behavioral;
